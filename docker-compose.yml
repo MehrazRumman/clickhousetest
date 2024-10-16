@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  clickhouse-node1:
+    image: yandex/clickhouse-server:latest
+    container_name: clickhouse-node1
+    environment:
+      - CLICKHOUSE_DB=default
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ./clickhouse_data1:/var/lib/clickhouse
+      - ./config/clusters.xml:/etc/clickhouse-server/config.d/clusters.xml:ro
+      - ./sql-scripts:/docker-entrypoint-initdb.d
+     
+    user: "101:101"
+
+  clickhouse-node2:
+    image: yandex/clickhouse-server:latest
+    container_name: clickhouse-node2
+    environment:
+      - CLICKHOUSE_DB=default
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=
+    ports:
+      - "8124:8123"
+      - "9001:9000"
+    volumes:
+      - ./clickhouse_data2:/var/lib/clickhouse
+      - ./config/clusters.xml:/etc/clickhouse-server/config.d/clusters.xml:ro
+      - ./sql-scripts:/docker-entrypoint-initdb.d
+      
+    user: "101:101"

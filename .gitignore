@@ -1,0 +1,8 @@
+# Ignore data directories
+/clickhouse_data1/
+/clickhouse_data2/
+/logs/
+
+# Ignore Docker-specific files
+.env
+*.log
