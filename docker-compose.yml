@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   clickhouse-node1:
-    image: yandex/clickhouse-server:latest
+    image: clickhouse/clickhouse-server:latest
     container_name: clickhouse-node1
     environment:
       - CLICKHOUSE_DB=default
@@ -13,12 +13,13 @@ services:
     volumes:
       - ./clickhouse_data1:/var/lib/clickhouse
       - ./config/clusters.xml:/etc/clickhouse-server/config.d/clusters.xml:ro
-      - ./sql-scripts:/docker-entrypoint-initdb.d
+      - ./sql-scripts/create_table1.sql:/docker/entrypoint-initdb.d/create_table1.sql:ro
      
     user: "101:101"
 
   clickhouse-node2:
-    image: yandex/clickhouse-server:latest
+    image: clickhouse/clickhouse-server:latest
+
     container_name: clickhouse-node2
     environment:
       - CLICKHOUSE_DB=default
@@ -30,6 +31,6 @@ services:
     volumes:
       - ./clickhouse_data2:/var/lib/clickhouse
       - ./config/clusters.xml:/etc/clickhouse-server/config.d/clusters.xml:ro
-      - ./sql-scripts:/docker-entrypoint-initdb.d
+      - ./sql-scripts2/create_table2.sql:/docker/entrypoint-initdb.d/create_table2.sql:ro
       
     user: "101:101"
